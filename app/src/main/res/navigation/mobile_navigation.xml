@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.countrylist.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_countrylist"
+        android:name="com.example.countrylist.ui.countries.CountryListFragment"
+        android:label="@string/title_countries"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.example.countrylist.ui.settings.SettingsFragment"
+        android:label="@string/title_settings"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_auth"
+        android:name="com.example.countrylist.ui.login.AuthFragment"
+        android:label="@string/sign_in"
+        tools:layout="@layout/auth_fragment"/>
+    <fragment
+        android:id="@+id/navigation_details"
+        android:name="com.example.countrylist.ui.country_details.CountryDetailsFragment"
+        tools:layout="@layout/country_details_fragment"/>
+
+</navigation>
