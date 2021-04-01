@@ -16,6 +16,9 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder>{
     private Context context;
     private List<Country> countries;
 
+    public void setCountries(List<Country> countries) {
+        this.countries = countries;
+    }
 
     private FavAdapter(Context context, List<Country> countries){
         this.context=context;

@@ -1,14 +1,33 @@
 package com.example.countrylist.models;
 
+
 public class User {
+    private int id;
     private String username;
     private String email;
     private String password;
+    private boolean isLoggedIn;
 
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public boolean isLoggedIn() {
+        return isLoggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        isLoggedIn = loggedIn;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {

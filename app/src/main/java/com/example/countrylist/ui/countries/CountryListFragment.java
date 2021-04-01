@@ -36,7 +36,7 @@ public class CountryListFragment extends BaseFragment {
             args.putString("country", szCountry);
             navController.navigate(R.id.navigation_details, args);
         }
-    });
+    }, false, null);
     private RecyclerView rvCountries;
 
 

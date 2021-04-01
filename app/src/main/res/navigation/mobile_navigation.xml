@@ -23,13 +23,12 @@
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_notifications" />
     <fragment
-        android:id="@+id/navigation_auth"
-        android:name="com.example.countrylist.ui.login.AuthFragment"
-        android:label="@string/sign_in"
-        tools:layout="@layout/auth_fragment"/>
-    <fragment
         android:id="@+id/navigation_details"
         android:name="com.example.countrylist.ui.country_details.CountryDetailsFragment"
-        tools:layout="@layout/country_details_fragment"/>
+        tools:layout="@layout/country_details_fragment">
+<!--        <action-->
+<!--            android:id="@+id/navigate_to_home_fragment"-->
+<!--            android:destination="@id/navigation_home" />-->
+    </fragment>
 
 </navigation>

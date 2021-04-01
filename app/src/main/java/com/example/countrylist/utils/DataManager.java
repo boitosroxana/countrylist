@@ -16,6 +16,7 @@ public class DataManager {
     private String username;
     private String email;
     private String password;
+    private boolean isLoggedIn = false;
 
 
     private DataManager() {
@@ -29,6 +30,10 @@ public class DataManager {
         return mInstance;
     }
 
+    public static void setString(String username, String password, String email) {
+    }
+
+
     public void init(Application app) {
         if (mSharedPreferences != null) return;
 
@@ -40,9 +45,9 @@ public class DataManager {
     }
 
     public synchronized void setString(String key, @Nullable String value) {
-        if (TextUtils.isEmpty(value)) mSharedPreferences.edit().remove(key).commit();
+        if (TextUtils.isEmpty(value)) mSharedPreferences.edit().remove(key).apply();
         else {
-            mSharedPreferences.edit().putString(key, value).commit();
+            mSharedPreferences.edit().putString(key, value).apply();
         }
     }
 
@@ -75,6 +80,15 @@ public class DataManager {
         return mSharedPreferences.getLong(key, defValue);
     }
 
+    public synchronized void setLoggedIn(boolean value) {
+        setLoggedIn(value);
+        setBoolean("isLoggedIn", getLoggedIn());
+    }
+
+    public synchronized boolean getLoggedIn() {
+        return getBoolean("isLoggedIn",false);
+    }
+
     public synchronized void signUp(User user){
         setUsername(user.getUsername());
         setEmail(user.getEmail());
@@ -82,7 +96,10 @@ public class DataManager {
         setString("username",getUsername());
         setString("email",getEmail());
         setString("password",getPassword());
+    }
 
+    public boolean isLoggedIn() {
+        return isLoggedIn;
     }
 
     public String getUsername() {

@@ -8,28 +8,43 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.countrylist.R;
+import com.example.countrylist.database.CountryDatabase;
+import com.example.countrylist.utils.BaseFragment;
 
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends BaseFragment {
 
     private SettingsViewModel settingsViewModel;
+    private AppCompatButton delete;
+
+    public SettingsFragment() {
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        settingsViewModel =
-                ViewModelProviders.of(this).get(SettingsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        settingsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        settingsViewModel = new SettingsViewModel();
+        return inflater.inflate(R.layout.fragment_notifications, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        delete = view.findViewById(R.id.btn_delete);
+        emptyDbOnClick();
+    }
+
+
+    private void emptyDbOnClick(){
+        delete.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onClick(View v) {
+                CountryDatabase.getInstance(getContext()).countryDao().removeAll();
             }
         });
-        return root;
     }
+
+
 }

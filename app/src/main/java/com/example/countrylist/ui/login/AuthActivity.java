@@ -1,24 +1,23 @@
 package com.example.countrylist.ui.login;
 
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.LayoutInflater;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.countrylist.MainActivity;
 import com.example.countrylist.R;
 import com.example.countrylist.models.User;
-import com.example.countrylist.utils.BaseFragment;
+import com.example.countrylist.utils.DataManager;
 
-public class AuthFragment extends BaseFragment {
-
+public class AuthActivity extends AppCompatActivity {
     private AuthViewModel mViewModel;
     private EditText edtUsername;
     private EditText edtEmail;
@@ -27,29 +26,20 @@ public class AuthFragment extends BaseFragment {
     private TextView tvAuth;
     private boolean isLogin;
 
-    public static AuthFragment newInstance() {
-        return new AuthFragment();
-    }
-
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        mViewModel = new AuthViewModel();
-        isLogin = false;
-
-        return inflater.inflate(R.layout.auth_fragment, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        edtUsername = view.findViewById(R.id.edt_username);
-        edtEmail = view.findViewById(R.id.edt_email);
-        edtPassword = view.findViewById(R.id.edt_password);
-        btnAuth = view.findViewById(R.id.btn_auth);
-        tvAuth = view.findViewById(R.id.tv_auth);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.auth_fragment);
+        edtUsername = findViewById(R.id.edt_username);
+        edtEmail = findViewById(R.id.edt_email);
+        edtPassword = findViewById(R.id.edt_password);
+        btnAuth = findViewById(R.id.btn_auth);
+        tvAuth = findViewById(R.id.tv_auth);
         setScreenOnClick();
         setActionOnClick();
+
+        mViewModel = new AuthViewModel();
+        isLogin = false;
 
     }
 
@@ -101,19 +91,34 @@ public class AuthFragment extends BaseFragment {
             public void onClick(View v) {
                 final User user = getData();
                 if (user != null) {
-                    if (isLogin) {
-                        mViewModel.singUp(user);
-                        navController.navigate(R.id.navigation_countrylist);
+                    if (!isLogin) {
+                        // mViewModel.singUp(user);
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        DataManager.setString("username","password","email");
 
                     } else {
+                        //DataManager.getInstance().setBoolean("isLoggedIn",true);
                         mViewModel.login(user.getUsername(), user.getPassword());
-                        navController.navigate((R.id.navigation_settings));
+                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+
                     }
                 } else{
-                    Toast.makeText(getContext(), "User cannot have empty fields! Check your data!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "User cannot have empty fields! Check your data!",
+                            Toast.LENGTH_LONG).show();
                 }
 
             }
         });
+    }
+
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        edtUsername = view.findViewById(R.id.edt_username);
+        edtEmail = view.findViewById(R.id.edt_email);
+        edtPassword = view.findViewById(R.id.edt_password);
+        btnAuth = view.findViewById(R.id.btn_auth);
+        tvAuth = view.findViewById(R.id.tv_auth);
+        setScreenOnClick();
+        setActionOnClick();
+
     }
 }

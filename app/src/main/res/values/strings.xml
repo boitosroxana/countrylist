@@ -13,4 +13,7 @@
     <string name="email">email</string>
     <string name="password">password</string>
     <string name="login">login</string>
+    <string name="currency_details">Currency details:</string>
+    <string name="favourite">Favourite</string>
+    <string name="empty_list">The list of favourite countries is empty, you should add some countries from the main list!</string>
 </resources>

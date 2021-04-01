@@ -1,24 +1,28 @@
-package com.example.countrylist.models;
+package com.example.countrylist.database.entities;
 
-import com.google.gson.annotations.SerializedName;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-public class Country {
-    @SerializedName("NumericCode")
+@Entity(tableName = "country")
+public class CountryEntity {
+    @PrimaryKey
+    @ColumnInfo
     private int id;
-    @SerializedName("Name")
+    @ColumnInfo
     private String name;
-    @SerializedName("FlagPng")
+    @ColumnInfo
     private String imgUrl;
-    @SerializedName("CurrencyCode")
+    @ColumnInfo
     private String currencyCode;
-    @SerializedName("CurrencySymbol")
+    @ColumnInfo
     private String currencySymbol;
-    @SerializedName("Region")
+    @ColumnInfo
     private String region;
-    @SerializedName("CurrencyName")
+    @ColumnInfo
     private String currencyName;
 
-    public Country(int id, String name, String imgUrl, String currencyCode, String currencySymbol, String region, String currencyName) {
+    public CountryEntity(int id, String name, String imgUrl, String currencyCode, String currencySymbol, String region, String currencyName) {
         this.id = id;
         this.name = name;
         this.imgUrl = imgUrl;
@@ -33,7 +37,7 @@ public class Country {
     }
 
     public void setCurrencyName(String currencyName) {
-        currencyName = currencyName;
+        this.currencyName = currencyName;
     }
 
     public int getId() {
@@ -83,4 +87,5 @@ public class Country {
     public void setRegion(String region) {
         this.region = region;
     }
+
 }
